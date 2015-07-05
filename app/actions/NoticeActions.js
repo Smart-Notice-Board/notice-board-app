@@ -14,7 +14,15 @@ export default ({
         startTime: '06/07/2015 03:31',
         endTime: '06/07/2015 03:32',
         priority: 5
-      }]
+      }, {
+        id: 124,
+        type: 'image',
+        desc: 'This is to notify every1 to see shit',
+        path: '2.jpg',
+        startTime: '06/07/2015 03:31',
+        endTime: '06/07/2015 03:50',
+        priority: 5
+      } ]
     })
   },
 

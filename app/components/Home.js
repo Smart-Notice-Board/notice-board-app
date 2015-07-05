@@ -57,6 +57,7 @@ class Home extends React.Component {
 
     var isNotice =  this.state.noticeData.notices.length != 0 ? true : false;
 
+    var path = "data/image/" + this.state.noticeData.notices[0].path;
     var college = this.state.collegeData.colleges[this.state.collegeData.selected];
 
     return (
@@ -82,10 +83,10 @@ class Home extends React.Component {
           <div className="panel">
         <div className="row">
           <div className="col-md-4 container">
-            Description of Placholder
+              {isNotice && this.state.noticeData.notices[0].desc}
           </div>
           <div className="col-md-8 jumbotron container">
-            {isNotice && this.state.noticeData.notices[0].desc}
+              <img src={path} alt="Fuck it" />
           </div>
         </div>
         </div>

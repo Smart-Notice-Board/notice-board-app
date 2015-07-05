@@ -24907,6 +24907,14 @@
 	        startTime: '06/07/2015 03:31',
 	        endTime: '06/07/2015 03:32',
 	        priority: 5
+	      }, {
+	        id: 124,
+	        type: 'image',
+	        desc: 'This is to notify every1 to see shit',
+	        path: '2.jpg',
+	        startTime: '06/07/2015 03:31',
+	        endTime: '06/07/2015 03:50',
+	        priority: 5
 	      }]
 	    });
 	  },
@@ -25021,6 +25029,7 @@
 
 	      var isNotice = this.state.noticeData.notices.length != 0 ? true : false;
 
+	      var path = 'data/image/' + this.state.noticeData.notices[0].path;
 	      var college = this.state.collegeData.colleges[this.state.collegeData.selected];
 
 	      return _react2['default'].createElement(
@@ -25080,12 +25089,12 @@
 	            _react2['default'].createElement(
 	              'div',
 	              { className: 'col-md-4 container' },
-	              'Description of Placholder'
+	              isNotice && this.state.noticeData.notices[0].desc
 	            ),
 	            _react2['default'].createElement(
 	              'div',
 	              { className: 'col-md-8 jumbotron container' },
-	              isNotice && this.state.noticeData.notices[0].desc
+	              _react2['default'].createElement('img', { src: path, alt: 'Fuck it' })
 	            )
 	          )
 	        )
