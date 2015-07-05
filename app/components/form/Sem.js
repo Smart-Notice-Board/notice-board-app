@@ -19,7 +19,7 @@ class Sem extends React.Component {
         <div className="form-group">
         <label className="col-sm-2 control-label"> Semester </label>
         <div className="col-sm-10">
-          <select className="form-control" name="semester" id="sem" onChange="setSem" >
+          <select className="form-control" name="semester" id="sem" onChange={this.setSem} >
             {semesters}
           </select>
             </div>

@@ -30,7 +30,7 @@ class AppStore extends EventEmitter {
   }
 }
 
-let _AppStore = new AppStore;
+let _AppStore = new AppStore();
 
 export default _AppStore;
 
