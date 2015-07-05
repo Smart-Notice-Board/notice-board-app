@@ -55,6 +55,8 @@ class Home extends React.Component {
   render () {
     console.log('Home', this.state);
 
+    var isNotice =  this.state.noticeData.notices.length != 0 ? true : false;
+
     var college = this.state.collegeData.colleges[this.state.collegeData.selected];
 
     return (
@@ -83,7 +85,7 @@ class Home extends React.Component {
             Description of Placholder
           </div>
           <div className="col-md-8 jumbotron container">
-            Placeholder
+            {isNotice && this.state.noticeData.notices[0].desc}
           </div>
         </div>
         </div>

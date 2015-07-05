@@ -9,7 +9,13 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel'
+      },
+      { test: /\.node$/,
+        loader: 'node-loader'
       }
     ]
+  },
+  node: {
+    fs: "empty"
   }
 };

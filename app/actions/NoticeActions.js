@@ -11,10 +11,16 @@ export default ({
         type: 'text',
         desc: 'This is to notify every1 to fuck off',
         path: 'None',
-        startTime: '12/01/2015 9:30',
-        endTime: '13/08/2016 10:30',
+        startTime: '06/07/2015 03:31',
+        endTime: '06/07/2015 03:32',
         priority: 5
       }]
+    })
+  },
+
+  refreshLocalNotice: () => {
+    AppDispatcher.handleAction({
+      type: AppConstants.RELOAD_NOTICES
     })
   }
 })
