@@ -44,7 +44,7 @@ let filterNotice =  () => {
 
 AppDispatcher.register(function(payload) {
   var action = payload.action;
-  console.log('Action received');
+  console.log('Action received', action.type);
   switch (action.type) {
     case ActionTypes.FETCH_NOTICES:
       wareHouse.notices = action.data;

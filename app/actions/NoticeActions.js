@@ -12,7 +12,7 @@ export default ({
         desc: 'This is to notify every1 to fuck off',
         path: 'None',
         startTime: '06/07/2015 03:31',
-        endTime: '06/07/2015 03:32',
+        endTime: '06/07/2016 03:32',
         priority: 5
       }, {
         id: 124,
@@ -20,7 +20,7 @@ export default ({
         desc: 'This is to notify every1 to see shit',
         path: '2.jpg',
         startTime: '06/07/2015 03:31',
-        endTime: '06/07/2015 03:50',
+        endTime: '06/07/2016 03:50',
         priority: 5
       } ]
     })

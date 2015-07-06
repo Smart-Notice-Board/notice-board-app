@@ -4,6 +4,7 @@ import AppStore from '../stores/AppStore'
 import NoticeActions from '../actions/NoticeActions'
 import AppActions from '../actions/AppActions'
 import { Link, Router } from 'react-router'
+import PlaceHolder from './Notice/PlaceHolder'
 
 class Home extends React.Component {
   constructor(props) {
@@ -86,7 +87,7 @@ class Home extends React.Component {
               {isNotice && this.state.noticeData.notices[0].desc}
           </div>
           <div className="col-md-8 jumbotron container">
-              <img src={path} alt="Fuck it" />
+              <PlaceHolder noticeData = {this.state.noticeData} />
           </div>
         </div>
         </div>
