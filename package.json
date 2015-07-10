@@ -31,7 +31,9 @@
     "run": "/home/akash/Kode/Digital/node_modules/electron-prebuilt/dist/electron ./app/"
   },
   "dependencies": {
+    "axios": "^0.5.4",
     "flux": "^2.0.3",
+    "is-online": "^5.0.0",
     "moment": "^2.10.3"
   }
 }

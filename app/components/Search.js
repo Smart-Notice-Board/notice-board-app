@@ -37,14 +37,7 @@ class Search extends React.Component {
   }
 
   fetchNotices () {
-
-    var data = {
-      college: this.state.colleges[this.state.selected],
-      department: this.state.colleges[this.state.selected].department[this.state.selectedDepartment],
-      sem: this.state.selectedSem
-    }
-
-    NoticeActions.getNotices(data);
+    NoticeActions.getNotices(this.state);
   }
 
   render() {

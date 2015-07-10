@@ -7,10 +7,10 @@ export default ({
       type: AppConstants.FETCHING_COLLEGES,
       data: [
           {
-              name: 'Rvce',
+              name: 'rvce',
               department: [
-                { name: 'CSE', sem: [{ name: 'Sem 1'  }] },
-                { name: 'ECE', sem: [{ name: 'Sem 2'  }] }
+                { name: 'cse', sem: [{ name: 'Sem 4'  }] },
+                { name: 'ece', sem: [{ name: 'Sem 2'  }] }
               ]
           },
           {
@@ -39,6 +39,7 @@ export default ({
     },
 
     selectSem: (sem) => {
+      console.log('Selecting sem ', sem)
       AppDispatcher.handleAction({
         type: AppConstants.SELECT_SEMESTER,
         data: sem

@@ -5,6 +5,7 @@ import NoticeActions from '../actions/NoticeActions'
 import AppActions from '../actions/AppActions'
 import { Link, Router } from 'react-router'
 import PlaceHolder from './Notice/PlaceHolder'
+import Sync from '../util/Sync'
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,12 +15,14 @@ class Home extends React.Component {
     this.state = this.inflateState();
 
     this.changeCallback = this.onChange.bind(this);
+    Sync.start();
   }
 
   inflateState () {
     var data = {};
     data.noticeData = NoticeStore.getState();
     data.collegeData = AppStore.getState();
+    console.log('Got data', data)
     return data;
   }
 
@@ -31,7 +34,7 @@ class Home extends React.Component {
 
     if (this.state.noticeData.notices.length === 0) {
       console.log("Fetch notices")
-      NoticeActions.getNotices();
+      NoticeActions.getNotices(this.state.collegeData);
     }
 
     if (this.state.collegeData.colleges.length === 0) {
@@ -46,7 +49,7 @@ class Home extends React.Component {
 
   onChange () {
     console.log('On Change')
-    this.setState(this.inflateState());
+    this.state = this.inflateState();
   }
 
   getOut () {

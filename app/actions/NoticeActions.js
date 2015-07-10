@@ -1,29 +1,33 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import AppConstants from '../constants/ActionTypes'
+import axios from 'axios'
 
 export default ({
   getNotices: (data) => {
     console.log('Get notice from server',data)
-    AppDispatcher.handleAction({
-      type: AppConstants.FETCH_NOTICES,
-      data: [{
-        id: 123,
-        type: 'text',
-        desc: 'This is to notify every1 to fuck off',
-        path: 'None',
-        startTime: '06/07/2015 03:31',
-        endTime: '06/07/2016 03:32',
-        priority: 5
-      }, {
-        id: 124,
-        type: 'image',
-        desc: 'This is to notify every1 to see shit',
-        path: '2.jpg',
-        startTime: '06/07/2015 03:31',
-        endTime: '06/07/2016 03:50',
-        priority: 5
-      } ]
-    })
+
+    let data_sent =  {
+      college: data.colleges[data.selected].name,
+      department: data.colleges[data.selected].department[data.selectedDepartment].name,
+      semester: data.colleges[data.selected].department[data.selectedDepartment].sem[data.selectedSem].name
+    }
+
+    console.log('Ijefoie',data_sent);
+
+    axios.post('http://192.168.50.4:3000/notices/deptnotices', data_sent)
+      .then((response) => {
+        console.log('Gogt from Rag',response);
+        AppDispatcher.handleAction({
+          type: AppConstants.FETCH_NOTICES,
+          data: response.data.result
+        })
+      })
+      .catch((response) => {
+        console.log("Error", response)
+      })
+
+
+    
   },
 
   refreshLocalNotice: () => {

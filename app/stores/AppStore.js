@@ -9,7 +9,7 @@ let data = {
   colleges: [],
   selected: 0,
   selectedDepartment: 0,
-  selectedSem: 1
+  selectedSem: 0
 }
 
 class AppStore extends EventEmitter {

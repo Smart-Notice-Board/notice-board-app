@@ -3,15 +3,16 @@ import React from 'react'
 class Sem extends React.Component {
 
     setSem (event) {
+      console.log('even', event.target.value)
       AppActions.selectSem(event.target.value);
     }
 
     render () {
-      console.log('Department', this.props.department);
+      console.log('Departmenta', this.props.department);
 
       var semesters = this.props.department.sem.map((sem, index) => {
         return (
-          <option value={sem} key={index} >{sem.name}</option>
+          <option value={index} key={index} >{sem.name}</option>
         )
       })
 
