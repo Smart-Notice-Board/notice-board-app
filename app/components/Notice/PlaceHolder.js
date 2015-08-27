@@ -28,7 +28,7 @@ class PlaceHolder extends React.Component {
 
         case 'image':
           var p = "./data/image/" + notice.path + '?' + Math.random();
-          return (<div className="image" key={notice.id}> <img src={p} alt={notice.description} /></div>)
+          return (<div key={notice.id}> <img src={p} className="image" alt={notice.description} /></div>)
           break;
        default:
         return <div key={notice.id}>Nothing</div>
@@ -37,7 +37,7 @@ class PlaceHolder extends React.Component {
    })
 
     return (
-      <Slider {...settings}>
+      <Slider className="placeholder" {...settings}>
       {pla}
     </Slider>
     )

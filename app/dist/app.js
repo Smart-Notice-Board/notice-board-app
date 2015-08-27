@@ -26848,7 +26848,7 @@
 	    value: function onChange() {
 	      console.log('On Change hey');
 	      this.state = this.inflateState();
-	      //  this.forceUpdate();
+	      this.forceUpdate();
 	    }
 	  }, {
 	    key: 'getOut',
@@ -26874,60 +26874,46 @@
 	        college = this.state.boardData.boards[this.state.boardData.selectedBoard];
 	      }
 
+	      /* return (
+	          <div>
+	           <div className="navbar navbar-default ">
+	           <div className="row container">
+	               <div className="col-md-4">
+	               Current Date
+	               </div>
+	               <div className="col-md-4">
+	                     <div className="row">{college}</div>
+	               </div>
+	                <div className="col-md-4 pull-right">
+	                 <Link to="app">
+	                 <button className="btn btn-default" >Get me outta here</button>
+	                 </Link>
+	               </div>
+	             </div>
+	             </div>
+	             <div className="panel">
+	           <div className="row">
+	             <div className="col-md-4 container">
+	                 {isNotice && this.state.noticeData.notices[0].description}
+	             </div>
+	             <div className="col-md-8 jumbotron container">
+	              </div>
+	           </div>
+	           </div>
+	           </div>
+	       );*/
+
 	      return _react2['default'].createElement(
 	        'div',
 	        null,
+	        _react2['default'].createElement(_NoticePlaceHolder2['default'], { noticeData: this.state.noticeData }),
 	        _react2['default'].createElement(
-	          'div',
-	          { className: 'navbar navbar-default ' },
+	          _reactRouter.Link,
+	          { to: 'app' },
 	          _react2['default'].createElement(
-	            'div',
-	            { className: 'row container' },
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'col-md-4' },
-	              'Current Date'
-	            ),
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'col-md-4' },
-	              _react2['default'].createElement(
-	                'div',
-	                { className: 'row' },
-	                college
-	              )
-	            ),
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'col-md-4 pull-right' },
-	              _react2['default'].createElement(
-	                _reactRouter.Link,
-	                { to: 'app' },
-	                _react2['default'].createElement(
-	                  'button',
-	                  { className: 'btn btn-default' },
-	                  'Get me outta here'
-	                )
-	              )
-	            )
-	          )
-	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'panel' },
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'row' },
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'col-md-4 container' },
-	              isNotice && this.state.noticeData.notices[0].description
-	            ),
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'col-md-8 jumbotron container' },
-	              _react2['default'].createElement(_NoticePlaceHolder2['default'], { noticeData: this.state.noticeData })
-	            )
+	            'button',
+	            { className: 'btn btn-default' },
+	            'Get me outta here'
 	          )
 	        )
 	      );
@@ -40363,28 +40349,28 @@
 	exports['default'] = {
 
 		start: function start() {
-			var j = _nodeSchedule2['default'].scheduleJob('42 * * * * *', function () {
-				(0, _isOnline2['default'])(function (err, online) {
+			var j = _nodeSchedule2['default'].scheduleJob('* 3 * * * *', function () {
+				/*	isOnline((err,online) => {*/
 
-					_axios2['default'].get(_constantsConfig2['default'].HOST + '/board_details').then(function (response) {
-						console.log('we are online');
-						var data = _storesAppStore2['default'].getState();
+				_axios2['default'].get(_constantsConfig2['default'].HOST + '/board_details').then(function (response) {
+					console.log('we are online');
+					var data = _storesAppStore2['default'].getState();
 
-						if (data.boards.length === 0) {
-							console.log('Doomed');
-						} else {
-							console.log('Data', data);
-							var data_sent = {
-								board_name: data.boards[data.selectedBoard]
-							};
-							console.log('Sent', data_sent);
-							_actionsNoticeActions2['default'].getNotices(data);
-						}
-					})['catch'](function (response) {
-						console.log('Nope not onlint', response);
-					});
+					if (data.boards.length === 0) {
+						console.log('Doomed');
+					} else {
+						console.log('Data', data);
+						var data_sent = {
+							board_name: data.boards[data.selectedBoard]
+						};
+						console.log('Sent', data_sent);
+						_actionsNoticeActions2['default'].getNotices(data);
+					}
+				})['catch'](function (response) {
+					console.log('Nope not onlint', response);
 				});
 			});
+			//});
 		},
 
 		getStaticFiles: function getStaticFiles(path) {
@@ -40575,6 +40561,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -40639,9 +40627,9 @@
 	            var p = './data/image/' + notice.path + '?' + Math.random();
 	            return _react2['default'].createElement(
 	              'div',
-	              { className: 'image', key: notice.id },
+	              { key: notice.id },
 	              ' ',
-	              _react2['default'].createElement('img', { src: p, alt: notice.description })
+	              _react2['default'].createElement('img', { src: p, className: 'image', alt: notice.description })
 	            );
 	            break;
 	          default:
@@ -40655,7 +40643,7 @@
 
 	      return _react2['default'].createElement(
 	        _reactSlick2['default'],
-	        settings,
+	        _extends({ className: 'placeholder' }, settings),
 	        pla
 	      );
 	    }

@@ -24,8 +24,8 @@ export default ({
 
 
 	start: () => {
-		var j = sch.scheduleJob('42 * * * * *', () => {
-			isOnline((err,online) => {
+		var j = sch.scheduleJob('* 3 * * * *', () => {
+		/*	isOnline((err,online) => {*/
 
 				request.get(Config.HOST + '/board_details')
 					.then((response) => {
@@ -37,10 +37,10 @@ export default ({
 				      	}
 
 				      	else {
-									console.log("Data", data)
+									console.log("Data", data);
 		      	    var data_sent = {
 						      board_name: data.boards[data.selectedBoard]
-						    }
+						    };
 									console.log("Sent", data_sent);
 							NoticeActions.getNotices(data);
 						}
@@ -49,8 +49,8 @@ export default ({
 						console.log("Nope not onlint", response)
 					})
 
-			})
-		});
+			});
+		//});
 	},
 
 	getStaticFiles: (path) => {

@@ -56,7 +56,7 @@ class Home extends React.Component {
   onChange () {
     console.log('On Change hey')
     this.state = this.inflateState();
-  //  this.forceUpdate();
+    this.forceUpdate();
   }
 
   getOut () {
@@ -81,7 +81,7 @@ class Home extends React.Component {
       college = this.state.boardData.boards[this.state.boardData.selectedBoard];
     }
 
-    return (
+   /* return (
 
       <div>
         <div className="navbar navbar-default ">
@@ -106,12 +106,22 @@ class Home extends React.Component {
               {isNotice && this.state.noticeData.notices[0].description}
           </div>
           <div className="col-md-8 jumbotron container">
-              <PlaceHolder noticeData = {this.state.noticeData} />
+
           </div>
         </div>
         </div>
         </div>
-    );
+    );*/
+
+
+      return (
+          <div>
+          <PlaceHolder noticeData = {this.state.noticeData} />
+          <Link to="app">
+          <button className="btn btn-default" >Get me outta here</button>
+          </Link>
+              </div>
+      );
   }
 }
 
