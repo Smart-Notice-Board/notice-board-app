@@ -15,6 +15,7 @@
     "tree-kill": "^0.1.1",
     "vinyl-map": "^1.0.1",
     "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1",
     "yargs": "^3.13.0"
   },
   "optionalDependencies": {
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "axios": "^0.5.4",
+    "electron-prebuilt": "^0.30.4",
     "flux": "^2.0.3",
     "is-online": "^5.0.0",
     "moment": "^2.10.3"

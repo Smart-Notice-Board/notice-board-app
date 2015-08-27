@@ -12,10 +12,15 @@
     <script src="vendor/electron_boilerplate/external_links.js"></script>
 
     <script src="vendor/require.js"></script>
-    <script>
+    <style media="screen">
+      image {
+        width: 200px;
+        height: 200px
+      }
+    </style>
+<!--    <script>
         requirejs(['app'], function (app) {});
     </script>-->
-
 
 
 </head>
@@ -24,6 +29,27 @@
     <div class="container-fluid" id="react-root">
 
     </div>
+    <script type="text/javascript">
+      var fs = require('fs');
+      var request = require('http');
+      var events = require('events');
+      var $notifier = new events.EventEmitter();
+      var $HOST = "http://192.168.43.118:3000";
+      var $dir = __dirname;
+      function download(pathRec) {
+
+        var filePath = __dirname + '/data/image/' + pathRec;
+        console.log(filePath);
+
+        request.get($HOST + "/uploads/image/" + pathRec, function (response) {
+          var f = fs.createWriteStream("app/data/image/" + pathRec);
+          response.pipe(f).on('close', function () {
+            $notifier.emit('done');
+          })
+        })
+
+      }
+    </script>
   <script src="dist/app.js" ></script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 import React from 'react'
 import Slider from 'react-slick'
+import NoticeActions from '../../actions/NoticeActions'
 
 class PlaceHolder extends React.Component {
 
   render () {
+
     var settings = {
      dots: true,
      infinite: true,
@@ -18,17 +20,18 @@ class PlaceHolder extends React.Component {
    var pla = noticeData.notices.map( (notice) => {
      console.log(notice);
 
+
      switch (notice.type) {
        case 'text':
-         return (<div> {notice.desc} </div>)
+         return (<div key={notice.id}> {notice.description} </div>)
          break;
 
         case 'image':
-          var p = "./data/image/" + notice.path;
-          return (<div><img src={p} alt={notice.desc} /></div>)
+          var p = "./data/image/" + notice.path + '?' + Math.random();
+          return (<div className="image" key={notice.id}> <img src={p} alt={notice.description} /></div>)
           break;
        default:
-        return <div>Nothing</div>
+        return <div key={notice.id}>Nothing</div>
      }
 
    })

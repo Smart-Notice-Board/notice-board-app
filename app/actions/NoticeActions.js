@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import AppConstants from '../constants/ActionTypes'
+import Config from '../constants/Config'
 import axios from 'axios'
 
 export default ({
@@ -7,14 +8,12 @@ export default ({
     console.log('Get notice from server',data)
 
     let data_sent =  {
-      college: data.colleges[data.selected].name,
-      department: data.colleges[data.selected].department[data.selectedDepartment].name,
-      semester: data.colleges[data.selected].department[data.selectedDepartment].sem[data.selectedSem].name
+      board_name: data.boards[data.selectedBoard]
     }
 
     console.log('Ijefoie',data_sent);
 
-    axios.post('http://192.168.50.4:3000/notices/deptnotices', data_sent)
+    axios.post(Config.HOST + '/notices/', data_sent)
       .then((response) => {
         console.log('Gogt from Rag',response);
         AppDispatcher.handleAction({
@@ -27,7 +26,7 @@ export default ({
       })
 
 
-    
+
   },
 
   refreshLocalNotice: () => {
