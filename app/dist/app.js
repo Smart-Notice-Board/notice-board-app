@@ -26875,7 +26875,7 @@
 	      }
 
 	      /* return (
-	          <div>
+	           <div>
 	           <div className="navbar navbar-default ">
 	           <div className="row container">
 	               <div className="col-md-4">
@@ -26884,7 +26884,7 @@
 	               <div className="col-md-4">
 	                     <div className="row">{college}</div>
 	               </div>
-	                <div className="col-md-4 pull-right">
+	                 <div className="col-md-4 pull-right">
 	                 <Link to="app">
 	                 <button className="btn btn-default" >Get me outta here</button>
 	                 </Link>
@@ -26897,7 +26897,7 @@
 	                 {isNotice && this.state.noticeData.notices[0].description}
 	             </div>
 	             <div className="col-md-8 jumbotron container">
-	              </div>
+	               </div>
 	           </div>
 	           </div>
 	           </div>
