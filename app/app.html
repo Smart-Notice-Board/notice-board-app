@@ -33,18 +33,18 @@
     </div>
     <script type="text/javascript">
       var fs = require('fs');
-      var request = require('http');
+      var request = require('https');
       var events = require('events');
       var $notifier = new events.EventEmitter();
-      var $HOST = "http://192.168.43.118:3000";
+      var $HOST = "https://radiant-headland-1017.herokuapp.com";
       var $dir = __dirname;
-      function download(pathRec) {
+      function download(pathRec, type) {
 
-        var filePath = __dirname + '/data/image/' + pathRec;
+        var filePath = __dirname + '/data' + '/' + type + '/' + pathRec;
         console.log(filePath);
 
-        request.get($HOST + "/uploads/image/" + pathRec, function (response) {
-          var f = fs.createWriteStream("app/data/image/" + pathRec);
+        request.get($HOST + "/uploads/" + type + "/" + pathRec, function (response) {
+          var f = fs.createWriteStream("app/data/" + type + "/" + pathRec);
           response.pipe(f).on('close', function () {
             $notifier.emit('done');
           })

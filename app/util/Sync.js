@@ -24,7 +24,7 @@ export default ({
 
 
 	start: () => {
-		var j = sch.scheduleJob('* 3 * * * *', () => {
+		var j = sch.scheduleJob('42 * * * * *', () => {
 		/*	isOnline((err,online) => {*/
 
 				request.get(Config.HOST + '/board_details')
@@ -53,13 +53,13 @@ export default ({
 		//});
 	},
 
-	getStaticFiles: (path) => {
+	getStaticFiles: (path, type) => {
 		//hard coded for image
 		console.log("This shoulf noty be called", path);
-		if (fs.existsSync($dir + '/data/image/' + path)) {
+		if (fs.existsSync($dir + '/data' + '/' + type + '/' + path)) {
 
 		} else {
-			download(path);
+			download(path, type);
 		}
 
 	}

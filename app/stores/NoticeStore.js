@@ -40,7 +40,7 @@ let filterNotice =  () => {
   data.notices = wareHouse.notices.filter((notice) => {
     console.log("Notice", notice);
     if(notice.type === "image" || notice.type === "video") {
-      Sync.getStaticFiles(notice.path)
+      Sync.getStaticFiles(notice.path, notice.type)
     }
 
     return Scheduler.valid(notice.startTime, notice.endTime);
