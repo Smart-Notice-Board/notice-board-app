@@ -2,6 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher'
 import AppConstants from '../constants/ActionTypes'
 import Config from '../constants/Config'
 import axios from 'axios'
+import Scheduler from '../util/Scheduler'
 
 export default ({
   getNotices: (data) => {
@@ -33,5 +34,13 @@ export default ({
     AppDispatcher.handleAction({
       type: AppConstants.RELOAD_NOTICES
     })
+  },
+
+  changeNotice: () => {
+    console.log("Change Notice called");
+    AppDispatcher.handleAction({
+      type: AppConstants.CHANGE_NOTICE
+    })
+    
   }
 })

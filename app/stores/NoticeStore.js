@@ -3,16 +3,19 @@ import ActionTypes from '../constants/ActionTypes'
 import { EventEmitter } from 'events'
 import Scheduler from '../util/Scheduler'
 import Sync from '../util/Sync'
+import NoticeActions from '../actions/NoticeActions'
 // selected index of selected college
 // selectedDepartment index of selected Department
 // selectedSem selected Semseter
 let data = {
-  notices: []
+  notices: [],
+  activeNotice: null
 }
 
 let wareHouse = {
   notices: []
 }
+
 
 class NoticeStore extends EventEmitter {
   getState () {
@@ -45,6 +48,8 @@ let filterNotice =  () => {
 
     return Scheduler.valid(notice.startTime, notice.endTime);
   })
+
+  data.activeNotice = data.notices.length > 0 ? data.notices[0] : null;
 }
 
 AppDispatcher.register(function(payload) {
@@ -63,6 +68,19 @@ AppDispatcher.register(function(payload) {
     case ActionTypes.RELOAD_NOTICES:
       filterNotice();
       _NoticeStore.emitChange();
+      break;
+
+    case ActionTypes.CHANGE_NOTICE:
+      if (data.notices.length > 0 || data.activeNotice) {
+        let length = data.notices.length;
+        let index = data.notices.indexOf(data.activeNotice);
+        console.log('Current is', index, length);
+        data.activeNotice = index < (length - 1) ? data.notices[++index] : data.notices[0];
+        Scheduler.changeNotice(3000, true);
+        _NoticeStore.emitChange();
+      }
+
+      break;
 
     default:
 

@@ -1,42 +1,32 @@
 import React from 'react'
-import Slider from 'react-slick'
 import NoticeActions from '../../actions/NoticeActions'
+import Scheduler from '../../util/Scheduler'
 
 class PlaceHolder extends React.Component {
 
   render () {
 
-    var settings = {
-     dots: true,
-     infinite: true,
-     speed: 500,
-     autoplay: true,
-     autoplaySpeed: 4000,
-     slidesToShow: 1,
-     slidesToScroll: 1
-   };
-
    var noticeData = this.props.noticeData;
 
-   var pla = noticeData.notices.map( (notice) => {
-     console.log(notice);
+   var pla = <div>No Notice </div>;
+   let notice = noticeData.activeNotice;
 
-     console.log('Props', this.props)
+   if(noticeData.activeNotice) {
+
      switch (notice.type) {
        case 'text':
-         return (<div key={notice.id}> {notice.description} </div>)
+         pla = (<div key={notice.id}> {notice.description} </div>)
          break;
 
         case 'image':
           var p = "./data/image/" + notice.path + '?' + Math.random();
-          return (<div key={notice.id}> <img src={p} className="image" alt={notice.description} /></div>)
+          pla = (<div key={notice.id}> <img src={p} className="image" alt={notice.description} /></div>)
           break;
 
         case 'video':
         console.log("Inside");
           var p = "./data/video/" + notice.path + '?' + Math.random();
-        //  settings.autoplaySpeed = 24000;
-          return (
+          pla = (
             <div key={notice.id}>
             <video className="image" alt={notice.description} controls autoPlay>
               <source src={p} type="video/mp4" />
@@ -55,15 +45,16 @@ class PlaceHolder extends React.Component {
           //   break;
 
        default:
-        return <div key={notice.id}>Nothing</div>
+        pla = <div key={notice.id}>Nothing</div>
      }
+     Scheduler.changeNotice(3000, false);
 
-   })
+   }
 
     return (
-      <Slider className="placeholder" {...settings}>
-      {pla}
-    </Slider>
+      <div >
+        {pla}
+      </div>
     )
   }
 }

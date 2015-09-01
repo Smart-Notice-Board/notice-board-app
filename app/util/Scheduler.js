@@ -3,7 +3,7 @@ import sch from 'node-schedule'
 import NoticeActions from '../actions/NoticeActions'
 
 let formatString = "DD/MM/YYYY HH:mm";
-
+let called = false;
 class Scheduler {
 
   //Schedule notice
@@ -44,6 +44,16 @@ class Scheduler {
       return false;
     }
 
+  }
+
+  changeNotice (time, call) {
+    if(call || !called) {
+      console.log('Once');
+      called = true;
+      setTimeout(() => {
+        NoticeActions.changeNotice();
+      }, time);
+  }
   }
 
 }
