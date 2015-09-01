@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/components/Home.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/components/Notice/PlaceHolder.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/constants/Config.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/node_modules/react/lib/ReactUpdateQueue.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/stores/AppStore.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/util/Sync.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webpack.config.js" charset="UTF-8" />
+  </component>
+</project>

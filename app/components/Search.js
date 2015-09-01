@@ -3,8 +3,6 @@
  */
 import React from 'react'
 import { Link } from 'react-router'
-import Department from './form/Department'
-import Sem from './form/Sem'
 import College from './form/College'
 import AppStore from '../stores/AppStore'
 import AppActions from '../actions/AppActions'
@@ -21,9 +19,9 @@ class Search extends React.Component {
   componentWillMount () {
     AppStore.addChangeListener(this.changeCallback);
 
-    if (this.state.colleges.length === 0) {
-      console.log("Fetch College")
-      AppActions.fetchColleges();
+    if (this.state.boards.length === 0) {
+      console.log("Fetch boards")
+      AppActions.fetchBoards();
     }
 
   }
@@ -41,43 +39,45 @@ class Search extends React.Component {
   }
 
   render() {
-      var selectedCollege = this.state.colleges[this.state.selected];
-      var selectedDepartment = selectedCollege.department[this.state.selectedDepartment];
-      var selectedSem = this.state.selectedSem;
 
+      var selectedBoard = this.state.boards[this.state.selectedBoard] ;
+      var template;
 
-      return (
+      if (selectedBoard) {
+        console.log("Selected", selectedBoard);
+
+        template = (
+           <div className="container">
+             <div className="row">
+               <form className="form-horizontal">
+               <div className="row">
+                 <College
+                   boards={this.state.boards}
+                   selected={this.state.selectedBoard}
+                 />
+               </div>
+
+                   <Link to="notice">
+                   <div className="row">
+                     <button className="btn btn-default btn-lg" onClick={this.fetchNotices.bind(this)} >Fetch Notices</button>
+                   </div>
+                   </Link>
+                 </form>
+             </div>
+           </div>
+         )
+
+      } else  {
+        template = (
           <div className="container">
-            <div className="row">
-              <form className="form-horizontal">
-              <div className="row">
-                <College
-                  colleges={this.state.colleges}
-                  selected={this.state.selected}
-                />
-              </div>
-                <div className="row">
-                  <Department
-                    college={selectedCollege}
-                    selectedDepartment={this.state.selectedDepartment}
-                  />
-                </div>
-                  <div className="row">
-                  <Sem
-                    department={selectedDepartment}
-                    selectedSem={selectedSem}
-                  />
-                  </div>
-
-                  <Link to="notice">
-                  <div className="row">
-                    <button className="btn btn-default btn-lg" onClick={this.fetchNotices.bind(this)} >Fetch Notices</button>
-                  </div>
-                  </Link>
-                </form>
-            </div>
+            <div className="panel">Please connect to the server.</div>
           </div>
-      )
+        )
+      }
+
+
+
+      return template;
   }
 }
 

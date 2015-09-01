@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher'
 import ActionTypes from '../constants/ActionTypes'
 import { EventEmitter } from 'events'
 import Scheduler from '../util/Scheduler'
-
+import Sync from '../util/Sync'
 // selected index of selected college
 // selectedDepartment index of selected Department
 // selectedSem selected Semseter
@@ -38,6 +38,11 @@ export default _NoticeStore;
 
 let filterNotice =  () => {
   data.notices = wareHouse.notices.filter((notice) => {
+    console.log("Notice", notice);
+    if(notice.type === "image" || notice.type === "video") {
+      Sync.getStaticFiles(notice.path, notice.type)
+    }
+
     return Scheduler.valid(notice.startTime, notice.endTime);
   })
 }

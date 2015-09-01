@@ -1,5 +1,8 @@
+var webpack = require('webpack');
 module.exports = {
-  entry: "./app/index.js",
+  entry: {
+    app: ["./app/index.js"]
+  },
   output: {
     filename: "./app/dist/app.js"
   },
@@ -15,7 +18,9 @@ module.exports = {
       }
     ]
   },
-  node: {
-    fs: "empty"
-  }
+    node: {
+        fs: "empty"
+    }
+
+
 };

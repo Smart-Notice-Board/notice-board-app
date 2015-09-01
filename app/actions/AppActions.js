@@ -1,49 +1,33 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import AppConstants from '../constants/ActionTypes'
+import Config from '../constants/Config'
+import axios from 'axios'
 
 export default ({
-  fetchColleges: () => {
-    AppDispatcher.handleAction({
-      type: AppConstants.FETCHING_COLLEGES,
-      data: [
-          {
-              name: 'rvce',
-              department: [
-                { name: 'cse', sem: [{ name: 'Sem 4'  }] },
-                { name: 'ece', sem: [{ name: 'Sem 2'  }] }
-              ]
-          },
-          {
-                  name: 'PESIT',
-                  department: [
-                    { name: 'Mechanical', sem: [{ name: 'Sem 2' }] },
-                    { name: 'Electrical', sem: [{ name: 'Sem 6'  }] }
-                  ]
-          }
-        ]
-      });
-    },
+  fetchBoards: () => {
+    console.log("Action received");
+    axios.get(Config.HOST + '/board_details')
+      .then((response) => {
+        console.log('Respose',response.data.boardInfo);
+        let dataReceived = response.data.boardInfo;
 
-    selectCollege: (collegeIndex) => {
-      AppDispatcher.handleAction({
-        type: AppConstants.SELECT_COLLEGE,
-        data: collegeIndex
+        AppDispatcher.handleAction({
+          type: AppConstants.FETCHING_BOARDS,
+          data: dataReceived
+          });
+
+      })
+      .catch((reason) => {
+        console.log('Fucking cunt', reason);
       })
     },
 
-    selectDepartment: (departmentIndex) => {
+    selectBoard: (boardIndex) => {
       AppDispatcher.handleAction({
-        type: AppConstants.SELECT_DEPARTMENT,
-        data: departmentIndex
+        type: AppConstants.SELECT_BOARD,
+        data: boardIndex
       })
     },
 
-    selectSem: (sem) => {
-      console.log('Selecting sem ', sem)
-      AppDispatcher.handleAction({
-        type: AppConstants.SELECT_SEMESTER,
-        data: sem
-      })
-    }
 
 })

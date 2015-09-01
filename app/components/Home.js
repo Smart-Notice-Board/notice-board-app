@@ -16,17 +16,22 @@ class Home extends React.Component {
 
     this.changeCallback = this.onChange.bind(this);
     Sync.start();
+    $notifier.on('done', function () {
+      console.log('Hehaa');
+      NoticeActions.refreshLocalNotice();
+    })
   }
 
   inflateState () {
     var data = {};
     data.noticeData = NoticeStore.getState();
-    data.collegeData = AppStore.getState();
-    console.log('Got data', data)
+    data.boardData = AppStore.getState();
+    console.log('Got data inflate state', data)
     return data;
   }
 
   componentWillMount () {
+    console.log("Comp will mount");
     this.router = this.context.router;
     NoticeStore.addChangeListener(this.changeCallback);
 
@@ -34,10 +39,11 @@ class Home extends React.Component {
 
     if (this.state.noticeData.notices.length === 0) {
       console.log("Fetch notices")
-      NoticeActions.getNotices(this.state.collegeData);
+      NoticeActions.getNotices(this.state.boardData);
     }
 
-    if (this.state.collegeData.colleges.length === 0) {
+    if (this.state.boardData.boards.length === 0) {
+      console.log('No boards', this.state)
       this.router.transitionTo('app');
     }
 
@@ -48,8 +54,9 @@ class Home extends React.Component {
   }
 
   onChange () {
-    console.log('On Change')
+    console.log('On Change hey')
     this.state = this.inflateState();
+    this.forceUpdate();
   }
 
   getOut () {
@@ -60,11 +67,22 @@ class Home extends React.Component {
     console.log('Home', this.state);
 
     var isNotice =  this.state.noticeData.notices.length != 0 ? true : false;
+    var template;
+    var college;
 
-    var path = "data/image/" + this.state.noticeData.notices[0].path;
-    var college = this.state.collegeData.colleges[this.state.collegeData.selected];
+    console.log("isNotice", isNotice);
 
-    return (
+    if(isNotice) {
+      var path = "data/image/" + this.state.noticeData.notices[0].path;
+      college = this.state.boardData.boards[this.state.boardData.selectedBoard];
+      console.log("isNotice mgkhakra");
+
+    } else {
+      college = this.state.boardData.boards[this.state.boardData.selectedBoard];
+    }
+
+   /* return (
+
       <div>
         <div className="navbar navbar-default ">
         <div className="row container">
@@ -72,9 +90,7 @@ class Home extends React.Component {
             Current Date
             </div>
             <div className="col-md-4">
-                  <div className="row">{college.name}</div>
-                  <div className="row">{college.department[this.state.collegeData.selectedDepartment].name}</div>
-                  <div className="row">{this.state.collegeData.selectedSem}</div>
+                  <div className="row">{college}</div>
             </div>
 
             <div className="col-md-4 pull-right">
@@ -87,15 +103,25 @@ class Home extends React.Component {
           <div className="panel">
         <div className="row">
           <div className="col-md-4 container">
-              {isNotice && this.state.noticeData.notices[0].desc}
+              {isNotice && this.state.noticeData.notices[0].description}
           </div>
           <div className="col-md-8 jumbotron container">
-              <PlaceHolder noticeData = {this.state.noticeData} />
+
           </div>
         </div>
         </div>
         </div>
-    )
+    );*/
+
+
+      return (
+          <div>
+          <PlaceHolder noticeData = {this.state.noticeData} />
+          <Link to="app">
+          <button className="btn btn-default" >Get me outta here</button>
+          </Link>
+              </div>
+      );
   }
 }
 

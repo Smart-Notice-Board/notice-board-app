@@ -6,11 +6,9 @@ import { EventEmitter } from 'events'
 // selectedDepartment index of selected Department
 // selectedSem selected Semseter
 let data = {
-  colleges: [],
-  selected: 0,
-  selectedDepartment: 0,
-  selectedSem: 0
-}
+  boards: [],
+  selectedBoard: 0
+};
 
 class AppStore extends EventEmitter {
   getState () {
@@ -38,23 +36,14 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
   console.log('Action received', action.type);
   switch (action.type) {
-    case ActionTypes.FETCHING_COLLEGES:
-          data.colleges = action.data;
+    case ActionTypes.FETCHING_BOARDS:
+          console.log("ActionData", action.data)
+          data.boards = action.data;
           _AppStore.emitChange();
           break;
 
-    case ActionTypes.SELECT_COLLEGE:
-          data.selected = action.data;
-          _AppStore.emitChange();
-          break;
-
-    case ActionTypes.SELECT_DEPARTMENT:
-          data.selectedDepartment = action.data;
-          _AppStore.emitChange();
-          break;
-
-    case ActionTypes.SELECT_SEMESTER:
-          data.selectedSem = action.data;
+    case ActionTypes.SELECT_BOARD:
+          data.selectedBoard = action.data;
           _AppStore.emitChange();
           break;
 
