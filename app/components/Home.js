@@ -56,7 +56,7 @@ class Home extends React.Component {
   onChange () {
     console.log('On Change hey')
     this.state = this.inflateState();
-    this.forceUpdate();
+  //  this.forceUpdate();
   }
 
   getOut () {

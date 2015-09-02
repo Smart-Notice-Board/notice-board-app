@@ -12,9 +12,16 @@ class VideoPlayer extends React.Component {
   }
 
   componentDidMount () {
-    var vidElement = React.findDOMNode(this.refs.video);
+     console.log("Available", this.refs);
+     var vidElement = React.findDOMNode(this.refs.video);
     vidElement.addEventListener('ended', this.changeThis.bind(this));
+  }
 
+  componentWillReceiveProps () {
+    console.log("Props receiveed", this.refs);
+    var vidElement = React.findDOMNode(this.refs.video);
+
+    vidElement.addEventListener('ended', this.changeThis.bind(this));
   }
 
   componentWillUnmount () {
@@ -25,6 +32,7 @@ class VideoPlayer extends React.Component {
   render () {
     var notice = this.props.notice;
     var p = "./data/video/" + notice.path + '?' + Math.random();
+
     return (
       <div key={notice.id}>
       <video ref="video" className="image" alt={notice.description}  controls autoPlay>

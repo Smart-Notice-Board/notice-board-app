@@ -56,6 +56,10 @@ class Scheduler {
   }
   }
 
+  setCalled (value) {
+    called = value;
+  }
+
 }
 
 let _Scheduler = new Scheduler();

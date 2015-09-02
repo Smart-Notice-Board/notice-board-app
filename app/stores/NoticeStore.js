@@ -49,7 +49,10 @@ let filterNotice =  () => {
     return Scheduler.valid(notice.startTime, notice.endTime);
   })
 
-  data.activeNotice = data.notices.length > 0 ? data.notices[0] : null;
+
+   data.activeNotice = data.activeNotice || ( data.notices.length > 0 ? data.notices[0] : null);
+
+  Scheduler.setCalled(false);
 }
 
 AppDispatcher.register(function(payload) {
@@ -73,9 +76,23 @@ AppDispatcher.register(function(payload) {
     case ActionTypes.CHANGE_NOTICE:
       if (data.notices.length > 0 || data.activeNotice) {
         let length = data.notices.length;
-        let index = data.notices.indexOf(data.activeNotice);
+
+
+        //Since indexOf checks for === , wont work with objects
+        let index = data.notices.map(function (notice) {
+          return notice.id;
+        }).indexOf(data.activeNotice.id);
+
         console.log('Current is', index, length);
+
+        if(index == -1) {
+          console.warn("Current is -1", data.activeNotice);
+          console.log("Current is dta notices", data.notices);
+        }
+
+
         data.activeNotice = index < (length - 1) ? data.notices[++index] : data.notices[0];
+        console.log('activeNotice now', data.activeNotice);
 
         if(data.activeNotice.type != 'video') {
           //for video changing controlled by the component

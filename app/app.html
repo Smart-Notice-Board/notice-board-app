@@ -33,10 +33,10 @@
     </div>
     <script type="text/javascript">
       var fs = require('fs');
-      var request = require('http');
+      var request = require('https');
       var events = require('events');
       var $notifier = new events.EventEmitter();
-      var $HOST = "http://192.168.1.2:3000";
+      var $HOST = "https://gentle-journey-4854.herokuapp.com";
       var $dir = __dirname;
       function download(pathRec, type) {
 
