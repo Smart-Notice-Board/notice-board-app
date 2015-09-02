@@ -1,8 +1,11 @@
 import React from 'react'
 import NoticeActions from '../../actions/NoticeActions'
 import Scheduler from '../../util/Scheduler'
+import VideoPlayer from './Video'
 
 class PlaceHolder extends React.Component {
+
+
 
   render () {
 
@@ -23,31 +26,34 @@ class PlaceHolder extends React.Component {
           pla = (<div key={notice.id}> <img src={p} className="image" alt={notice.description} /></div>)
           break;
 
-        case 'video':
-        console.log("Inside");
-          var p = "./data/video/" + notice.path + '?' + Math.random();
-          pla = (
-            <div key={notice.id}>
-            <video className="image" alt={notice.description} controls autoPlay>
-              <source src={p} type="video/mp4" />
-              No suppoty
-            </video>
-            </div>
-          )
-          break;
+        // case 'video':
+        // console.log("Inside");
+        //   var p = "./data/video/" + notice.path + '?' + Math.random();
+        //   pla = (
+        //     <div key={notice.id}>
+        //     <video className="image" alt={notice.description} controls autoPlay>
+        //       <source src={p} type="video/mp4" />
+        //       No suppoty
+        //     </video>
+        //     </div>
+        //   )
+        //   break;
 
-          // case 'video':
-          //   return (
-          //     <VideoPlayer
-          //       notice={notice} >
-          //     </VideoPlayer>
-          //   )
-          //   break;
+          case 'video':
+            pla =  (
+              <VideoPlayer
+                notice={notice} >
+              </VideoPlayer>
+            )
+            break;
 
        default:
         pla = <div key={notice.id}>Nothing</div>
      }
-     Scheduler.changeNotice(3000, false);
+     if(notice.type != 'video') {
+       Scheduler.changeNotice(3000, false);
+       console.log('Change Notice');
+     }
 
    }
 

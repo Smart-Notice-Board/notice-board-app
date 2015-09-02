@@ -24701,7 +24701,7 @@
 	  value: true
 	});
 	exports["default"] = {
-	  HOST: "https://radiant-headland-1017.herokuapp.com"
+	  HOST: "http://192.168.1.2:3000"
 	};
 	module.exports = exports["default"];
 
@@ -27073,7 +27073,11 @@
 	        var index = data.notices.indexOf(data.activeNotice);
 	        console.log('Current is', index, _length);
 	        data.activeNotice = index < _length - 1 ? data.notices[++index] : data.notices[0];
-	        _utilScheduler2['default'].changeNotice(3000, true);
+
+	        if (data.activeNotice.type != 'video') {
+	          //for video changing controlled by the component
+	          _utilScheduler2['default'].changeNotice(3000, true);
+	        }
 	        _NoticeStore.emitChange();
 	      }
 
@@ -27167,6 +27171,7 @@
 	    key: 'changeNotice',
 	    value: function changeNotice(time, call) {
 	      if (call || !called) {
+	        // call || !called
 	        console.log('Once');
 	        called = true;
 	        setTimeout(function () {
@@ -40633,6 +40638,10 @@
 
 	var _utilScheduler2 = _interopRequireDefault(_utilScheduler);
 
+	var _Video = __webpack_require__(359);
+
+	var _Video2 = _interopRequireDefault(_Video);
+
 	var PlaceHolder = (function (_React$Component) {
 	  function PlaceHolder() {
 	    _classCallCheck(this, PlaceHolder);
@@ -40678,28 +40687,23 @@
 	            );
 	            break;
 
-	          case 'video':
-	            console.log('Inside');
-	            var p = './data/video/' + notice.path + '?' + Math.random();
-	            pla = _react2['default'].createElement(
-	              'div',
-	              { key: notice.id },
-	              _react2['default'].createElement(
-	                'video',
-	                { className: 'image', alt: notice.description, controls: true, autoPlay: true },
-	                _react2['default'].createElement('source', { src: p, type: 'video/mp4' }),
-	                'No suppoty'
-	              )
-	            );
-	            break;
-
 	          // case 'video':
-	          //   return (
-	          //     <VideoPlayer
-	          //       notice={notice} >
-	          //     </VideoPlayer>
+	          // console.log("Inside");
+	          //   var p = "./data/video/" + notice.path + '?' + Math.random();
+	          //   pla = (
+	          //     <div key={notice.id}>
+	          //     <video className="image" alt={notice.description} controls autoPlay>
+	          //       <source src={p} type="video/mp4" />
+	          //       No suppoty
+	          //     </video>
+	          //     </div>
 	          //   )
 	          //   break;
+
+	          case 'video':
+	            pla = _react2['default'].createElement(_Video2['default'], {
+	              notice: notice });
+	            break;
 
 	          default:
 	            pla = _react2['default'].createElement(
@@ -40708,7 +40712,10 @@
 	              'Nothing'
 	            );
 	        }
-	        _utilScheduler2['default'].changeNotice(3000, false);
+	        if (notice.type != 'video') {
+	          _utilScheduler2['default'].changeNotice(3000, false);
+	          console.log('Change Notice');
+	        }
 	      }
 
 	      return _react2['default'].createElement(
@@ -40797,6 +40804,90 @@
 	})(_react2['default'].Component);
 
 	exports['default'] = Splash;
+	module.exports = exports['default'];
+
+/***/ },
+/* 359 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _utilScheduler = __webpack_require__(231);
+
+	var _utilScheduler2 = _interopRequireDefault(_utilScheduler);
+
+	var VideoPlayer = (function (_React$Component) {
+	  function VideoPlayer() {
+	    _classCallCheck(this, VideoPlayer);
+
+	    _get(Object.getPrototypeOf(VideoPlayer.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _inherits(VideoPlayer, _React$Component);
+
+	  _createClass(VideoPlayer, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      console.log('Mounting here');
+	    }
+	  }, {
+	    key: 'changeThis',
+	    value: function changeThis() {
+	      console.log('Ended');
+	      _utilScheduler2['default'].changeNotice(100, true);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
+	      vidElement.addEventListener('ended', this.changeThis.bind(this));
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
+	      vidElement.removeEventListener('ended', this.changeThis.bind(this));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var notice = this.props.notice;
+	      var p = './data/video/' + notice.path + '?' + Math.random();
+	      return _react2['default'].createElement(
+	        'div',
+	        { key: notice.id },
+	        _react2['default'].createElement(
+	          'video',
+	          { ref: 'video', className: 'image', alt: notice.description, controls: true, autoPlay: true },
+	          _react2['default'].createElement('source', { src: p, type: 'video/mp4' }),
+	          'No suppoty'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return VideoPlayer;
+	})(_react2['default'].Component);
+
+	exports['default'] = VideoPlayer;
 	module.exports = exports['default'];
 
 /***/ }

@@ -1,3 +1,3 @@
 export default {
-  HOST: "https://radiant-headland-1017.herokuapp.com"
+  HOST: "http://192.168.1.2:3000"
 }

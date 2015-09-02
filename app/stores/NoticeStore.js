@@ -76,7 +76,11 @@ AppDispatcher.register(function(payload) {
         let index = data.notices.indexOf(data.activeNotice);
         console.log('Current is', index, length);
         data.activeNotice = index < (length - 1) ? data.notices[++index] : data.notices[0];
-        Scheduler.changeNotice(3000, true);
+
+        if(data.activeNotice.type != 'video') {
+          //for video changing controlled by the component
+          Scheduler.changeNotice(3000, true);
+        }
         _NoticeStore.emitChange();
       }
 

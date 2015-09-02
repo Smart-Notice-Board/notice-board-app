@@ -33,10 +33,10 @@
     </div>
     <script type="text/javascript">
       var fs = require('fs');
-      var request = require('https');
+      var request = require('http');
       var events = require('events');
       var $notifier = new events.EventEmitter();
-      var $HOST = "https://radiant-headland-1017.herokuapp.com";
+      var $HOST = "http://192.168.1.2:3000";
       var $dir = __dirname;
       function download(pathRec, type) {
 

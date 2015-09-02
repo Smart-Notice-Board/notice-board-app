@@ -47,7 +47,7 @@ class Scheduler {
   }
 
   changeNotice (time, call) {
-    if(call || !called) {
+    if(call || !called) { // call || !called
       console.log('Once');
       called = true;
       setTimeout(() => {
