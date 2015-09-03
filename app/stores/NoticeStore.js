@@ -40,6 +40,7 @@ let _NoticeStore = new NoticeStore();
 export default _NoticeStore;
 
 let filterNotice =  () => {
+  console.log('Filter notie');
   data.notices = wareHouse.notices.filter((notice) => {
     console.log("Notice", notice);
     if(notice.type === "image" || notice.type === "video") {
@@ -49,10 +50,14 @@ let filterNotice =  () => {
     return Scheduler.valid(notice.startTime, notice.endTime);
   })
 
+  if(!data.activeNotice) {
+    console.log("no call no gud")
+    data.activeNotice = data.notices.length > 0 ? data.notices[0] : null;
+  }
 
-   data.activeNotice = data.activeNotice || ( data.notices.length > 0 ? data.notices[0] : null);
+   //data.activeNotice = data.activeNotice || ( data.notices.length > 0 ? data.notices[0] : null);
 
-  Scheduler.setCalled(false);
+//  Scheduler.setCalled(false);
 }
 
 AppDispatcher.register(function(payload) {
@@ -92,7 +97,7 @@ AppDispatcher.register(function(payload) {
 
 
         data.activeNotice = index < (length - 1) ? data.notices[++index] : data.notices[0];
-        console.log('activeNotice now', data.activeNotice);
+        console.log('activeNotice now', data.activeNotice, Date.now());
 
         if(data.activeNotice.type != 'video') {
           //for video changing controlled by the component

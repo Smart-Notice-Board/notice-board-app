@@ -5,8 +5,6 @@ import VideoPlayer from './Video'
 
 class PlaceHolder extends React.Component {
 
-
-
   render () {
 
    var noticeData = this.props.noticeData;

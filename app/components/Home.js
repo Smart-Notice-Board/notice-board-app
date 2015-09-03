@@ -14,7 +14,7 @@ class Home extends React.Component {
 
     this.state = this.inflateState();
 
-    this.changeCallback = this.onChange.bind(this);
+    this.changeCallback = this._onChange.bind(this);
     Sync.start();
     $notifier.on('done', function () {
       console.log('Hehaa');
@@ -26,7 +26,7 @@ class Home extends React.Component {
     var data = {};
     data.noticeData = NoticeStore.getState();
     data.boardData = AppStore.getState();
-    console.log('Got data inflate state', data)
+    console.log('Got data inflate state active', data.noticeData.activeNotice, Date.now())
     return data;
   }
 
@@ -50,12 +50,13 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
-  //  NoticeStore.removeChangeListener(this.changeCallback);
+    console.log("This", this);
+    NoticeStore.removeChangeListener(this.changeCallback);
   }
 
-  onChange () {
+  _onChange () {
     console.log('On Change hey')
-    this.state = this.inflateState();
+    this.setState(this.inflateState());
   //  this.forceUpdate();
   }
 
@@ -65,7 +66,7 @@ class Home extends React.Component {
 
   render () {
     console.log('Home', this.state);
-
+    console.log('Len', this.state.noticeData.notices.length)
     var isNotice =  this.state.noticeData.notices.length != 0 ? true : false;
     var template;
     var college;

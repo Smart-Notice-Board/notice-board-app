@@ -26838,7 +26838,7 @@
 	    value: function changeNotice(time, call) {
 	      if (call || !called) {
 	        // call || !called
-	        console.log('Once');
+	        console.log('Once', time);
 	        called = true;
 	        setTimeout(function () {
 	          _actionsNoticeActions2['default'].changeNotice();
@@ -40081,7 +40081,7 @@
 
 	    this.state = this.inflateState();
 
-	    this.changeCallback = this.onChange.bind(this);
+	    this.changeCallback = this._onChange.bind(this);
 	    _utilSync2['default'].start();
 	    $notifier.on('done', function () {
 	      console.log('Hehaa');
@@ -40097,7 +40097,7 @@
 	      var data = {};
 	      data.noticeData = _storesNoticeStore2['default'].getState();
 	      data.boardData = _storesAppStore2['default'].getState();
-	      console.log('Got data inflate state', data);
+	      console.log('Got data inflate state active', data.noticeData.activeNotice, Date.now());
 	      return data;
 	    }
 	  }, {
@@ -40121,12 +40121,15 @@
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {}
+	    value: function componentWillUnmount() {
+	      console.log('This', this);
+	      _storesNoticeStore2['default'].removeChangeListener(this.changeCallback);
+	    }
 	  }, {
-	    key: 'onChange',
-	    value: function onChange() {
+	    key: '_onChange',
+	    value: function _onChange() {
 	      console.log('On Change hey');
-	      this.state = this.inflateState();
+	      this.setState(this.inflateState());
 	      //  this.forceUpdate();
 	    }
 	  }, {
@@ -40138,7 +40141,7 @@
 	    key: 'render',
 	    value: function render() {
 	      console.log('Home', this.state);
-
+	      console.log('Len', this.state.noticeData.notices.length);
 	      var isNotice = this.state.noticeData.notices.length != 0 ? true : false;
 	      var template;
 	      var college;
@@ -40208,8 +40211,6 @@
 
 	exports['default'] = Home;
 	module.exports = exports['default'];
-
-	//  NoticeStore.removeChangeListener(this.changeCallback);
 
 /***/ },
 /* 326 */
@@ -40304,6 +40305,7 @@
 	exports['default'] = _NoticeStore;
 
 	var filterNotice = function filterNotice() {
+	  console.log('Filter notie');
 	  data.notices = wareHouse.notices.filter(function (notice) {
 	    console.log('Notice', notice);
 	    if (notice.type === 'image' || notice.type === 'video') {
@@ -40313,9 +40315,14 @@
 	    return _utilScheduler2['default'].valid(notice.startTime, notice.endTime);
 	  });
 
-	  data.activeNotice = data.activeNotice || (data.notices.length > 0 ? data.notices[0] : null);
+	  if (!data.activeNotice) {
+	    console.log('no call no gud');
+	    data.activeNotice = data.notices.length > 0 ? data.notices[0] : null;
+	  }
 
-	  _utilScheduler2['default'].setCalled(false);
+	  //data.activeNotice = data.activeNotice || ( data.notices.length > 0 ? data.notices[0] : null);
+
+	  //  Scheduler.setCalled(false);
 	};
 
 	_dispatcherAppDispatcher2['default'].register(function (payload) {
@@ -40353,7 +40360,7 @@
 	        }
 
 	        data.activeNotice = index < _length - 1 ? data.notices[++index] : data.notices[0];
-	        console.log('activeNotice now', data.activeNotice);
+	        console.log('activeNotice now', data.activeNotice, Date.now());
 
 	        if (data.activeNotice.type != 'video') {
 	          //for video changing controlled by the component
@@ -40805,18 +40812,15 @@
 	      console.log('Available', this.refs);
 	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
 	      vidElement.addEventListener('ended', this.changeThis.bind(this));
+	      console.log('Added did mount');
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      console.log('Props receiveed', this.refs);
-	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
-
-	      vidElement.addEventListener('ended', this.changeThis.bind(this));
-	    }
+	    value: function componentWillReceiveProps() {}
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
+	      console.log('Removed');
 	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
 	      vidElement.removeEventListener('ended', this.changeThis.bind(this));
 	    }
@@ -40844,6 +40848,11 @@
 
 	exports['default'] = VideoPlayer;
 	module.exports = exports['default'];
+
+	// console.log("Props receiveed", this.refs);
+	// var vidElement = React.findDOMNode(this.refs.video);
+	// console.warn("Added");
+	// vidElement.addEventListener('ended', this.changeThis.bind(this));
 
 /***/ },
 /* 337 */
