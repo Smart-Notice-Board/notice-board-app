@@ -44,10 +44,14 @@
         console.log(filePath);
 
         request.get($HOST + "/uploads/" + type + "/" + pathRec, function (response) {
-          var f = fs.createWriteStream("app/data/" + type + "/" + pathRec);
-          response.pipe(f).on('close', function () {
-            $notifier.emit('done');
-          })
+          var f = fs.createWriteStream(filePath);
+          response.pipe(f)
+            .on('close', function () {
+              $notifier.emit('done');
+            })
+            .on('error', function (err) {
+              console.log("TEri maa ki Hert", err);
+            });
         })
 
       }

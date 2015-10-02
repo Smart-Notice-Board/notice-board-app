@@ -23,6 +23,14 @@ class VideoPlayer extends React.Component {
     // var vidElement = React.findDOMNode(this.refs.video);
     // console.warn("Added");
     // vidElement.addEventListener('ended', this.changeThis.bind(this));
+    console.log("Props receiveed");
+  }
+
+
+  componentDidUpdate () {
+    console.log("Did update");
+    var vidElement = React.findDOMNode(this.refs.video);
+   vidElement.addEventListener('ended', this.changeThis.bind(this));
   }
 
   componentWillUnmount () {

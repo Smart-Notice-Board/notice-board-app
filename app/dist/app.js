@@ -40816,7 +40816,20 @@
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {}
+	    value: function componentWillReceiveProps() {
+	      // console.log("Props receiveed", this.refs);
+	      // var vidElement = React.findDOMNode(this.refs.video);
+	      // console.warn("Added");
+	      // vidElement.addEventListener('ended', this.changeThis.bind(this));
+	      console.log('Props receiveed');
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      console.log('Did update');
+	      var vidElement = _react2['default'].findDOMNode(this.refs.video);
+	      vidElement.addEventListener('ended', this.changeThis.bind(this));
+	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
@@ -40848,11 +40861,6 @@
 
 	exports['default'] = VideoPlayer;
 	module.exports = exports['default'];
-
-	// console.log("Props receiveed", this.refs);
-	// var vidElement = React.findDOMNode(this.refs.video);
-	// console.warn("Added");
-	// vidElement.addEventListener('ended', this.changeThis.bind(this));
 
 /***/ },
 /* 337 */
