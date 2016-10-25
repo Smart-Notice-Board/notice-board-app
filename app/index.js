@@ -4,4 +4,4 @@ import routes from './config/routes'
 
 Router.run(routes, (Root, state) => {
   React.render(<Root  {...state} />, document.getElementById('react-root'));
-})
+});

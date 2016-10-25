@@ -21,7 +21,7 @@ class PlaceHolder extends React.Component {
 
         case 'image':
           var p = "./data/image/" + notice.path + '?' + Math.random();
-          pla = (<div key={notice.id}> <img src={p} className="image" alt={notice.description} /></div>)
+          pla = (<div key={notice.id}> <img src={p} className="imagee" alt={notice.description} /></div>)
           break;
 
         // case 'video':

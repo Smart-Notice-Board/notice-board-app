@@ -33,10 +33,10 @@
     </div>
     <script type="text/javascript">
       var fs = require('fs');
-      var request = require('https');
+      var request = require('http');
       var events = require('events');
       var $notifier = new events.EventEmitter();
-      var $HOST = "https://gentle-journey-4854.herokuapp.com";
+      var $HOST = "http://torpedo.servegame.com:8080";
       var $dir = __dirname;
       function download(pathRec, type) {
 

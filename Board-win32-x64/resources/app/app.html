@@ -33,21 +33,26 @@
     </div>
     <script type="text/javascript">
       var fs = require('fs');
-      var request = require('https');
+      var request = require('http');
       var events = require('events');
       var $notifier = new events.EventEmitter();
-      var $HOST = "https://gentle-journey-4854.herokuapp.com";
+      var $HOST = "http://192.168.0.106:3000";
       var $dir = __dirname;
       function download(pathRec, type) {
 
         var filePath = __dirname + '/data' + '/' + type + '/' + pathRec;
         console.log(filePath);
 
-        request.get($HOST + "/uploads/" + type + "/" + pathRec, function (response) {
-          var f = fs.createWriteStream("app/data/" + type + "/" + pathRec);
-          response.pipe(f).on('close', function () {
-            $notifier.emit('done');
-          })
+        request.get($HOST + "/uploads/" + type + "/" + pathRec, function (response, err) {
+          console.log(';Error wa ', err, $HOST + "/uploads/" + type + "/" + pathRec, __dirname);
+          var f = fs.createWriteStream(__dirname + "/data/" + type + "/" + pathRec);
+          response.pipe(f)
+            .on('close', function () {
+              $notifier.emit('done');
+            })
+            .on('error', function (err) {
+              console.log(err);
+            })
         })
 
       }

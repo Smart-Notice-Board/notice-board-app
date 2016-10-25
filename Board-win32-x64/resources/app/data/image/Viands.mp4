@@ -1,1 +1,0 @@
-{"success":false,"message":"No token provided."}

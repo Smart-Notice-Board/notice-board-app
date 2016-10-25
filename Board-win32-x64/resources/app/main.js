@@ -35,7 +35,7 @@ app.on('ready', function () {
     //     mainWindow.openDevTools();
     // }
 
-  //  mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     mainWindow.on('close', function () {
         mainWindowState.saveState(mainWindow);

@@ -118,9 +118,6 @@ class Home extends React.Component {
       return (
           <div>
           <PlaceHolder noticeData = {this.state.noticeData} />
-          <Link to="app">
-          <button className="btn btn-default" >Get me outta here</button>
-          </Link>
               </div>
       );
   }

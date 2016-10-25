@@ -1,44 +1,47 @@
 'use strict';
 
-var app = require('app');
-var BrowserWindow = require('browser-window');
+const {app, BrowserWindow} = require('electron')
+
 
 // var env = require('./vendor/electron_boilerplate/env_config');
 // var devHelper = require('./vendor/electron_boilerplate/dev_helper');
- var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+ // var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 //require('browser-window').addDevToolsExtension('../react-devtools');
 var mainWindow;
 
 // Preserver of the window size and position between app launches.
-var mainWindowState = windowStateKeeper('main', {
-    width: 1000,
-    height: 600
-});
+// var mainWindowState = windowStateKeeper('main', {
+//     width: 1000,
+//     height: 600
+// });
 
 app.on('ready', function () {
 
     mainWindow = new BrowserWindow({
-        x: mainWindowState.x,
-        y: mainWindowState.y,
-        width: mainWindowState.width,
-        height: mainWindowState.height
+        width: 1000,
+        height: 600,
+        kiosk: true
     });
 
-    if (mainWindowState.isMaximized) {
-        mainWindow.maximize();
-    }
+    mainWindow.setMenu(null);
 
-    mainWindow.loadUrl('file://' + __dirname + '/app.html');
+    // if (mainWindowState.isMaximized) {
+    //     mainWindow.maximize();
+    // }
+
+    // mainWindow.fullscreen = true;
+
+    mainWindow.loadURL('file://' + __dirname + '/app.html');
 
     // if (env.name === 'development') {
     //     //devHelper.setDevMenu();
     //     mainWindow.openDevTools();
     // }
 
-  //  mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     mainWindow.on('close', function () {
-        mainWindowState.saveState(mainWindow);
+        console.log('window closed')
     });
 });
 

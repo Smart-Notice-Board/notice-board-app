@@ -101,7 +101,7 @@ AppDispatcher.register(function(payload) {
 
         if(data.activeNotice.type != 'video') {
           //for video changing controlled by the component
-          Scheduler.changeNotice(3000, true);
+          Scheduler.changeNotice(8000, true);
         }
         _NoticeStore.emitChange();
       }

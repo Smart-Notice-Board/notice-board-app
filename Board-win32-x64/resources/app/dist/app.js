@@ -24701,7 +24701,7 @@
 	  value: true
 	});
 	exports["default"] = {
-	  HOST: "https://gentle-journey-4854.herokuapp.com"
+	  HOST: "http://192.168.0.106:3000"
 	};
 	module.exports = exports["default"];
 
@@ -26821,7 +26821,7 @@
 	  }, {
 	    key: 'valid',
 	    value: function valid(noticeStartTime, noticeEndTime) {
-
+	    	console.log('s e', noticeStartTime, noticeEndTime);
 	      var curTime = (0, _moment2['default'])();
 	      var startTime = (0, _moment2['default'])(noticeStartTime, formatString);
 	      var endTime = (0, _moment2['default'])(noticeEndTime, formatString);

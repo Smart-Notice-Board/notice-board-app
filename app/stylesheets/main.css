@@ -18,3 +18,8 @@ a {
 .subtitle {
     color: gray;
 }
+
+.imagee {
+	height: 100%;
+	width: 100%;
+}
